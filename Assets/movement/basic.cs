@@ -6,7 +6,7 @@ using System;
 public class BasicMovement : MonoBehaviour {
   [Header("Movement Settings")]
   public float speed = 5f;
-  public float jumpForce = 10f;
+  public float jumpForce = 5f;
   public bool canJump = false;
   public Rigidbody2D rb;
 
