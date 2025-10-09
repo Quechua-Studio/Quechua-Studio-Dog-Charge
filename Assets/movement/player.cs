@@ -11,7 +11,7 @@ using Unity.VisualScripting;
  */
 public class PlayerMovement : BasicMovement {
     public Vector3 respawnPoint = Vector3.zero;
-    public float fallThreshold = -5f;
+    public float fallThreshold;
 
     void Update() {
         HandleInput();
@@ -20,17 +20,18 @@ public class PlayerMovement : BasicMovement {
     }
 
     private void HandleInput() {
-        // Salto
-        if (Keyboard.current.spaceKey.wasPressedThisFrame || Keyboard.current.wKey.wasPressedThisFrame) {
+        // Salto - IMPORTANTE: wasPressedThisFrame hace que solo salte UNA VEZ por presión
+        if ((Keyboard.current.spaceKey.wasPressedThisFrame || Keyboard.current.wKey.wasPressedThisFrame) && this.canJump) {
             this.Jump();
         }
+
+        // Movimiento horizontal
         this.MoveHorizontal();
 
         // Reset manual
-        if (Keyboard.current.rKey.isPressed) {
+        if (Keyboard.current.rKey.wasPressedThisFrame) {
             this.ResetPosition(respawnPoint);
         }
-
     }
 
     private void CheckFallRespawn() {
