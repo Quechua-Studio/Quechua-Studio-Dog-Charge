@@ -510,8 +510,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   speed: 10
   jumpForce: 100
-  isGrounded: 1
-  horizontalInput: 0
+  canJump: 0
+  rb: {fileID: 0}
   respawnPoint: {x: 0, y: 0, z: 0}
   fallThreshold: -5
 --- !u!1 &1052414450
@@ -527,7 +527,7 @@ GameObject:
   - component: {fileID: 1052414453}
   m_Layer: 0
   m_Name: floor
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
