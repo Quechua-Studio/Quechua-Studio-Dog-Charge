@@ -43,6 +43,6 @@ public class TerrainGenerator : MonoBehaviour
         Vector3 pos = new Vector3(lastChunkX, Random.Range(-1f, 1f), 0f);
         var go = Instantiate(chunkPrefab, pos, Quaternion.identity, transform);
         // Optionally randomize tile sprites / obstacles inside chunk via script on chunk prefab
-        activeChunks.Enqueue(go);,
+        activeChunks.Enqueue(go);
     }
 }
