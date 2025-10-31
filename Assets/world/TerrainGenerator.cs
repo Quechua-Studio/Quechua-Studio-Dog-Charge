@@ -32,6 +32,10 @@ public class TerrainGenerator : MonoBehaviour {
     [Tooltip("¿Activar variación de altura?")]
     public bool enableHeightVariation = true;
 
+    [Header("Sprite Adaptation")]
+    [Tooltip("Rotar el chunk para que su sprite siga la pendiente calculada")]
+    public bool rotateChunkToSlope = true;
+
     [Header("Slope Settings (Pendientes)")]
     [Tooltip("Ángulo máximo de pendiente en grados (ej: 15 = subida/bajada moderada)")]
     [Range(0f, 45f)]
@@ -131,11 +135,11 @@ public class TerrainGenerator : MonoBehaviour {
             // Verifica si el chunk está muy atrás
             if (frontChunk != null && frontChunk.transform.position.x + chunkWidth < player.position.x - destroyOffset) {
                 Destroy(activeChunks.Dequeue());
-                
+
                 // Remueve la posición del queue también
                 if (chunkPositions.Count > 0) {
                     chunkPositions.Dequeue();
-                    
+
                     // Actualiza el collider suave
                     if (generateSmoothCollision && terrainCollider != null) {
                         UpdateSmoothCollider();
@@ -151,6 +155,8 @@ public class TerrainGenerator : MonoBehaviour {
 
     // Genera un nuevo chunk de terreno
     private void SpawnChunk() {
+        float prevYForAngle = lastChunkY;
+
         // Avanza en X (siempre horizontal)
         lastChunkX += chunkWidth;
 
@@ -174,7 +180,7 @@ public class TerrainGenerator : MonoBehaviour {
 
         // Actualiza la última posición Y
         lastChunkY = yPos;
-        
+
         // Posición del chunk (sin rotación)
         Vector3 position = new Vector3(lastChunkX, yPos, 0f);
 
@@ -184,7 +190,11 @@ public class TerrainGenerator : MonoBehaviour {
         // Instancia el chunk SIN rotación - los chunks se colocan uno tras otro
         // La pendiente se crea por el cambio de altura entre chunks, no por rotación
         GameObject newChunk = Instantiate(chunkPrefab, position, Quaternion.identity, transform);
-        newChunk.name = $"Chunk_{activeChunks.Count}_Y{yPos:F1}";
+        // Rota el chunk para que su sprite siga la pendiente entre el chunk anterior y éste
+        if (rotateChunkToSlope) {
+            float angleDeg = Mathf.Atan2(lastChunkY - prevYForAngle, chunkWidth) * Mathf.Rad2Deg;
+            newChunk.transform.rotation = Quaternion.Euler(0f, 0f, angleDeg);
+        }
 
         // Desactiva el collider del chunk individual si usamos collider suave
         if (generateSmoothCollision) {
@@ -205,7 +215,7 @@ public class TerrainGenerator : MonoBehaviour {
     // Crea el Edge Collider 2D para colisión suave
     private void CreateSmoothCollider() {
         GameObject colliderObject;
-        
+
         if (collisionParent != null) {
             colliderObject = collisionParent;
         } else {
@@ -220,7 +230,7 @@ public class TerrainGenerator : MonoBehaviour {
 
         // Configura el collider
         terrainCollider.edgeRadius = 0.1f; // Radio pequeño para suavizar
-        
+
         Debug.Log("TerrainGenerator: Collider suave creado.");
     }
 
@@ -230,12 +240,12 @@ public class TerrainGenerator : MonoBehaviour {
 
         // Convierte las posiciones a un array de Vector2
         List<Vector2> points = new List<Vector2>();
-        
+
         foreach (Vector3 pos in chunkPositions) {
             // Añade el punto superior del chunk (superficie)
             points.Add(new Vector2(pos.x - chunkWidth / 2f, pos.y));
         }
-        
+
         // Añade el último punto (esquina derecha del último chunk)
         if (chunkPositions.Count > 0) {
             Vector3 lastPos = chunkPositions.ToArray()[chunkPositions.Count - 1];
@@ -284,13 +294,13 @@ public class TerrainGenerator : MonoBehaviour {
                 Destroy(chunk);
             }
         }
-        
+
         chunkPositions.Clear();
-        
+
         if (terrainCollider != null) {
             terrainCollider.points = new Vector2[0];
         }
-        
+
         lastChunkX = 0f;
         lastChunkY = 0f;
         currentSlope = 0f;
