@@ -12,4 +12,21 @@ public class CambiarMenu : MonoBehaviour {
     SceneManager.LoadSceneAsync(0);
   }
 
+  public void OpenOptions() {
+    SceneManager.LoadSceneAsync(2);
+  }
+
+  public void ViewCredits()
+  {
+  SceneManager.LoadSceneAsync(1);
+  }
+  public void QuitGame()
+  {
+    Application.Quit();
+  }
+
+  public void MainMenu()
+  {
+  SceneManager.LoadSceneAsync(3);
+  }
 }
