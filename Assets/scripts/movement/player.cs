@@ -13,6 +13,13 @@ public class PlayerMovement : BasicMovement {
     public Vector3 respawnPoint = Vector3.zero;
     public float fallThreshold;
 
+    /**
+     *Entiendo que es provisorio pero creo que no debería haber un spawnpoint.
+     *si el jugador se cae debería perder en el momento.
+     *En los niveles funcionaria para hacer checkpoints, pero por ahora estamos en el infinito
+     */
+
+
     void Update() {
         HandleInput();
         // Para resetear automático al caer al vacío
@@ -40,5 +47,8 @@ public class PlayerMovement : BasicMovement {
             this.ResetPosition(respawnPoint);
         }
     }
+
+
 }
+
 

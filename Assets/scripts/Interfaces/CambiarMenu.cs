@@ -9,7 +9,7 @@ using System.Collections.Generic;
 public class CambiarMenu : MonoBehaviour {
   public void PlayGame()
   {
-    SceneManager.LoadSceneAsync(0);
+    SceneManager.LoadSceneAsync(1);
   }
 
   public void OpenOptions() {
@@ -18,7 +18,7 @@ public class CambiarMenu : MonoBehaviour {
 
   public void ViewCredits()
   {
-  SceneManager.LoadSceneAsync(1);
+  SceneManager.LoadSceneAsync(3);
   }
   public void QuitGame()
   {
@@ -27,6 +27,6 @@ public class CambiarMenu : MonoBehaviour {
 
   public void MainMenu()
   {
-  SceneManager.LoadSceneAsync(3);
+  SceneManager.LoadSceneAsync(0);
   }
 }

@@ -6,7 +6,7 @@ using System;
 public class BasicMovement : MonoBehaviour {
   [Header("Movement Settings")]
   public float speed = 5f;
-  public float jumpForce = 10f;
+  public float jumpForce = 400f;
   public bool canJump = false;
   public Rigidbody2D rb;
 
@@ -19,8 +19,10 @@ public class BasicMovement : MonoBehaviour {
 
   // Mover objeto horizontalmente.
   // Mover constantemente hacia la dirección X positiva.
+
+  //
   protected void MoveHorizontal() {
-    rb.linearVelocity = new Vector2(this.speed, rb.linearVelocity.y);
+    rb.linearVelocity = new Vector2(speed, rb.linearVelocity.y);
 
   }
 
@@ -31,7 +33,7 @@ public class BasicMovement : MonoBehaviour {
     if (this.canJump) {
       // IMPORTANTE: Establece la velocidad Y directamente
       // Esto hace que el salto SIEMPRE sea de la misma altura
-      rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+      rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce) * Time.deltaTime;
     }
   }
 
