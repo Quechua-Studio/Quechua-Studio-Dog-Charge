@@ -24,7 +24,8 @@ public class BasicMovement : MonoBehaviour {
   private void OnCollisionExit2D(Collision2D collision) {
     // Detecta si dejó de tocar el suelo
     if (collision.gameObject.CompareTag("Ground")) {
-      canJump = false;
+      // PARCIALMENTE NO FUNCIONA POR UN BUG, cambiar a false
+      canJump = true;
     }
   }
 
