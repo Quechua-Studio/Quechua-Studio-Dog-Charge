@@ -19,6 +19,8 @@ public class DogMovement : MonoBehaviour {
     transform.position += new Vector3(DogSpeed, 0, 0) * Time.deltaTime;
 
     UpdateAnimator();
+
+    DogSpeed += 1f * Time.deltaTime;;
   }
 
   /*Si detecta que está dentro de "AreaDeSalto" hace un salto.

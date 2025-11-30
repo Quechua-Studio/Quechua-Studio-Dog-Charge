@@ -1,9 +1,10 @@
+using System;
 using UnityEngine;
 
 public class BasicMovement : MonoBehaviour {
   [Header("Movement Settings")] public float speed = 5f;
 
-  public float jumpForce = 20f;
+  public float jumpForce = 100f;
   public bool canJump;
   public Rigidbody2D rb;
 
@@ -51,4 +52,6 @@ public class BasicMovement : MonoBehaviour {
     transform.position = position;
     rb.linearVelocity = Vector2.zero; // Detiene todo movimiento
   }
+
 }
+
