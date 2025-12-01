@@ -35,7 +35,7 @@ public class PlayerMovement : BasicMovement {
 
   private void HandleInput() {
     // Salto - IMPORTANTE: wasPressedThisFrame hace que solo salte UNA VEZ por presión
-    if ((Keyboard.current.spaceKey.wasPressedThisFrame || Keyboard.current.wKey.wasPressedThisFrame) && canJump &&
+    if ((Keyboard.current.spaceKey.wasPressedThisFrame) && canJump &&
         jumpCharge >= 1) {
       Jump();
       jumpCharge -= 1f;
@@ -48,7 +48,7 @@ public class PlayerMovement : BasicMovement {
     if (Keyboard.current.rKey.wasPressedThisFrame) {
       ResetPosition(respawnPoint);
     }
-    
+
 
     bool isSlamming = Input.GetKey(KeyCode.LeftShift);
     if (isSlamming)
