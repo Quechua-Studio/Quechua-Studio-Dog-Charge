@@ -1,6 +1,6 @@
 using System;
 using UnityEngine;
-
+  //Franco García
 public class DogMovement : MonoBehaviour {
   public float DogSpeed = 10f;
   private Rigidbody2D rb;
@@ -10,12 +10,13 @@ public class DogMovement : MonoBehaviour {
   private bool isInJumpArea  = false;
   private bool WantsToChange = false;
 
+  //Franco García
   private void Start() {
     rb = GetComponent<Rigidbody2D>();
     animator = GetComponent<Animator>();
   }
 
-
+  //Franco García
   void Update() {
     //Movimiento horizontal constante
     transform.position += new Vector3(DogSpeed, 0, 0) * Time.deltaTime;
@@ -30,6 +31,8 @@ public class DogMovement : MonoBehaviour {
   El rango necesita del tag para funcionar.
   El salto es automático.
   */
+
+  //Franco García y Bruno Tejería
   private void OnTriggerEnter2D(Collider2D other)
   {
     if (other.CompareTag("JumpingArea")) {
@@ -42,12 +45,14 @@ public class DogMovement : MonoBehaviour {
     }
   }
 
+  //Franco García
   //Ejecuta el salto y (se supone) que cambia la animación
   void Jump() {
     rb.AddForce(Vector2.up * 1000);
 
   }
 
+  //Franco García
   private void OnTriggerExit2D(Collider2D other) {
     if (other.CompareTag("JumpingArea"))
     {
@@ -55,12 +60,14 @@ public class DogMovement : MonoBehaviour {
     }
   }
 
-
+  //Bruno Tejería y Franco García
   private void OnCollisionExit2D(Collision2D collision) {
     if (collision.collider.CompareTag("Ground")) {
       isGrounded = false;
     }
   }
+
+  //Franco García
   private void UpdateAnimator()
   {
     animator.SetBool("isInJumpArea", isInJumpArea);
@@ -69,6 +76,8 @@ public class DogMovement : MonoBehaviour {
       changeTheAnimation();
     }
   }
+
+  //Franco García
   private void changeTheAnimation()
   {
     animator.SetBool("isInJumpArea", isInJumpArea);

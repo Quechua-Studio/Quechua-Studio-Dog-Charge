@@ -1,6 +1,6 @@
 using System;
 using UnityEngine;
-
+//Bruno Tejería y Franco García
 public class BasicMovement : MonoBehaviour {
   [Header("Movement Settings")] public float speed = 5f;
 
@@ -8,6 +8,7 @@ public class BasicMovement : MonoBehaviour {
   public bool canJump;
   public Rigidbody2D rb;
 
+  //Bruno Tejería
   protected virtual void Awake() {
     rb = GetComponent<Rigidbody2D>();
     if (rb == null) {
@@ -15,6 +16,7 @@ public class BasicMovement : MonoBehaviour {
     }
   }
 
+  //Bruno Tejería
   private void OnCollisionEnter2D(Collision2D collision) {
     // Detecta si está tocando el suelo
     if (collision.gameObject.CompareTag("Ground")) {
@@ -22,6 +24,7 @@ public class BasicMovement : MonoBehaviour {
     }
   }
 
+  //Bruno Tejería
   private void OnCollisionExit2D(Collision2D collision) {
     // Detecta si dejó de tocar el suelo
     if (collision.gameObject.CompareTag("Ground")) {
@@ -32,13 +35,15 @@ public class BasicMovement : MonoBehaviour {
 
   // Mover objeto horizontalmente.
   // Mover constantemente hacia la dirección X positiva.
+
+  //Bruno Tejería
   protected void MoveHorizontal() {
     rb.linearVelocity = new Vector2(speed, rb.linearVelocity.y);
   }
 
   //
   // Salto con altura constante. Solo funciona si está en el suelo.
-  //
+  //Bruno Tejería
   protected void Jump() {
     if (canJump) {
       // IMPORTANTE: Establece la velocidad Y directamente
@@ -47,6 +52,7 @@ public class BasicMovement : MonoBehaviour {
     }
   }
 
+  //Bruno Tejería
   /// Resetea la posición del objeto, útil para respawn o reinicio
   protected void ResetPosition(Vector3 position) {
     transform.position = position;

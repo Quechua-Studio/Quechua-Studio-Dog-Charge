@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
  * Movimiento específico del jugador.
  * Hereda de BasicMovement y añade controles de teclado.
  */
+
+  //Franco García y Bruno Tejería
 public class PlayerMovement : BasicMovement {
   public Vector3 respawnPoint = Vector3.zero;
   public float fallThreshold;
@@ -13,10 +15,14 @@ public class PlayerMovement : BasicMovement {
   public float SlamCharge = 0f;
   private Rigidbody2D rb;
   public float DashCharge = 0f;
+
+  //Franco García
   private void Start()
   {
     rb = GetComponent<Rigidbody2D>();
   }
+
+  //Franco García y Bruno Tejería
   private void Update() {
     HandleInput();
     // Para resetear automático al caer al vacío
@@ -33,6 +39,7 @@ public class PlayerMovement : BasicMovement {
     speed += 1f * Time.deltaTime;
   }
 
+  //Bruno Tejería y Franco García
   private void HandleInput() {
     // Salto - IMPORTANTE: wasPressedThisFrame hace que solo salte UNA VEZ por presión
     if ((Keyboard.current.spaceKey.wasPressedThisFrame) && canJump &&
@@ -62,6 +69,7 @@ public class PlayerMovement : BasicMovement {
     }
   }
 
+  //Bruno Tejería
   private void CheckFallRespawn() {
     // Auto-respawn si cae al vacío
     if (transform.position.y < fallThreshold) {
@@ -69,12 +77,14 @@ public class PlayerMovement : BasicMovement {
     }
   }
 
+  //Franco García
   public void Slam()
   {
     rb.AddForce(Vector2.down * 2000);
     SlamCharge -= 1;
   }
 
+  //Franco García
   private void regulateSlamCharge()
   {
     if (SlamCharge > 1)
@@ -88,12 +98,14 @@ public class PlayerMovement : BasicMovement {
     }
   }
 
+  //Franco García
   private void Dash()
   {
     rb.AddForce(Vector2.right * 10000);
     DashCharge -= 0.1f;
   }
 
+  //Franco García
   private void RegulateDash() {
     if (DashCharge > 1)
     {
@@ -105,6 +117,7 @@ public class PlayerMovement : BasicMovement {
     }
   }
 
+  //Franco García
   private void RegulateJump() {
     if (jumpCharge > 2) {
       jumpCharge = 2;
@@ -114,6 +127,8 @@ public class PlayerMovement : BasicMovement {
       jumpCharge = 0;
     }
   }
+
+  //Franco García
   private void OnCollisionEnter2D(Collision2D collision) {
     // Detecta si está tocando el suelo
     if (collision.gameObject.CompareTag("Ground")) {
