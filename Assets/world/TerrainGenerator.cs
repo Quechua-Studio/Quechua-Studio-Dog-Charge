@@ -6,8 +6,8 @@ using UnityEngine;
 //Bruno Tejería, Facundo Barragán
 public class TerrainGenerator : MonoBehaviour {
   public GameObject[] chunkPrefabs;
-  public float minAngle = -30f;
-  public float maxAngle = 30f;
+  public float minAngle = -20f;
+  public float maxAngle = 20f;
   public Transform playerTransform;
   public int defaultChunkIndex = 0;
 
