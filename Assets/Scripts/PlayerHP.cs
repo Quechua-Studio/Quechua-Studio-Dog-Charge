@@ -52,6 +52,6 @@ public class PlayerHP : MonoBehaviour {
   //Franco García
   public void Die() {
     Destroy(gameObject);
-    SceneManager.LoadSceneAsync(1);
+    SceneManager.LoadSceneAsync(5);
   }
 }
