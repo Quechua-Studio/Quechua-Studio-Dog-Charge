@@ -3,10 +3,11 @@ using UnityEngine;
 
 // Generador de terreno procedural infinito.
 // Genera chunks adelante del jugador y destruye los que quedan atrás.
+//Bruno Tejería, Facundo Barragán
 public class TerrainGenerator : MonoBehaviour {
   public GameObject[] chunkPrefabs;
-  public float minAngle = -30f;
-  public float maxAngle = 30f;
+  public float minAngle = -20f;
+  public float maxAngle = 20f;
   public Transform playerTransform;
   public int defaultChunkIndex = 0;
 
@@ -15,19 +16,20 @@ public class TerrainGenerator : MonoBehaviour {
   public GameObject lastChunk;
   private Transform _nextChunkPosition;
 
-
+  //Bruno Tejería
   public void Start() {
     _nextChunkPosition = transform;
     // Crear primer chunk forzado a ser el primero
     CreateChunk(defaultChunkIndex);
   }
 
+  //Bruno Tejería
   public void Update() {
     if (playerTransform.position.x + chunkOffset > _nextChunkPosition.position.x) {
       CreateChunk();
     }
   }
-
+  //Bruno Tejería y Facundo Barragán
   private void CreateChunk(int i = -1) {
     int index = i != -1
       ? i

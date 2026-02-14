@@ -1,6 +1,6 @@
 using UnityEngine;
 using System;
-
+  //Facundo Barragán, Bruno Tejería
 public class SkiSafariCamera : MonoBehaviour {
     // Referencia al jugador
     public Transform player;
@@ -21,6 +21,7 @@ public class SkiSafariCamera : MonoBehaviour {
     // Referencia a la cámara
     private Camera cam;
 
+    //Facundo Barragán, Bruno Tejería
     void Start() {
         cam = GetComponent<Camera>();
         if (player == null) {
@@ -30,6 +31,7 @@ public class SkiSafariCamera : MonoBehaviour {
         playerRb = player.GetComponent<Rigidbody2D>();
     }
 
+    //Facundo Barragán, Bruno Tejería
     void LateUpdate() {
         if (player == null) {
 
